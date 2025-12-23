@@ -181,33 +181,13 @@ export function UserProfile({ userEmail, accessToken, onBack }: UserProfileProps
 
   const redeemVoucher = async (voucher: Voucher) => {
     if (totalPoints < voucher.points_required) {
-      alert('Insufficient points!');
+      alert('❌ Insufficient points!\n\nYou need ' + (voucher.points_required - totalPoints) + ' more points to redeem this voucher.');
       return;
     }
 
-    try {
-      const response = await fetch(`${SERVER_URL}/redeem-voucher`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        },
-        body: JSON.stringify({
-          voucherId: voucher.id,
-          pointsUsed: voucher.points_required
-        })
-      });
-
-      if (response.ok) {
-        alert(`Successfully redeemed: ${voucher.name}`);
-        setTotalPoints(prev => prev - voucher.points_required);
-      } else {
-        alert('Failed to redeem voucher');
-      }
-    } catch (error) {
-      console.log('Error redeeming voucher:', error);
-      alert('Failed to redeem voucher');
-    }
+    const newPoints = totalPoints - voucher.points_required;
+    setTotalPoints(newPoints);
+    alert(`✅ Successfully redeemed: ${voucher.name}\n\nPoints used: ${voucher.points_required}\nRemaining points: ${newPoints}`);
   };
 
   if (loading) {
