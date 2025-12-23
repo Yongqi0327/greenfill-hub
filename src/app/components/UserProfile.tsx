@@ -244,17 +244,17 @@ export function UserProfile({ userEmail, accessToken, onBack }: UserProfileProps
           </div>
           
           {/* Summary Statistics */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold text-green-600">{totalRefills}</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-green-600">{totalRefills}</div>
               <p className="text-xs sm:text-sm text-muted-foreground">Total Refills</p>
             </div>
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold text-blue-600">{totalVolume}ml</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">{totalVolume}ml</div>
               <p className="text-xs sm:text-sm text-muted-foreground">Total Volume</p>
             </div>
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold text-purple-600">RM {totalSpent.toFixed(2)}</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-purple-600 break-all">RM{totalSpent.toFixed(2)}</div>
               <p className="text-xs sm:text-sm text-muted-foreground">Total Spent</p>
             </div>
           </div>
