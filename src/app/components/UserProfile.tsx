@@ -241,39 +241,41 @@ export function UserProfile({ userEmail, accessToken, onBack }: UserProfileProps
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* User Info & Points */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <div className="flex items-start justify-between mb-6">
+        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                 <User className="w-8 h-8 text-green-600" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold mb-1">User Profile</h2>
-                <p className="text-muted-foreground">{userEmail}</p>
+                <h2 className="text-xl sm:text-2xl font-bold mb-1">User Profile</h2>
+                <p className="text-sm text-muted-foreground break-all">{userEmail}</p>
               </div>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center gap-2 text-3xl font-bold text-green-600">
-                <Star className="w-8 h-8" />
-                {totalPoints}
-              </div>
-              <p className="text-sm text-muted-foreground">Reward Points</p>
             </div>
           </div>
           
+          {/* Reward Points */}
+          <div className="bg-green-50 rounded-lg p-4 mb-6">
+            <div className="flex items-center justify-center gap-2">
+              <Star className="w-6 h-6 text-green-600" />
+              <span className="text-3xl font-bold text-green-600">{totalPoints}</span>
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-1">Reward Points</p>
+          </div>
+          
           {/* Summary Statistics */}
-          <div className="grid grid-cols-3 gap-6 pt-6 border-t border-border">
+          <div className="grid grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">{totalRefills}</div>
-              <p className="text-sm text-muted-foreground">Total Refills</p>
+              <div className="text-xl sm:text-2xl font-bold text-green-600">{totalRefills}</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Total Refills</p>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">{totalVolume}ml</div>
-              <p className="text-sm text-muted-foreground">Total Volume</p>
+              <div className="text-xl sm:text-2xl font-bold text-blue-600">{totalVolume}ml</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Total Volume</p>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">RM {totalSpent.toFixed(2)}</div>
-              <p className="text-sm text-muted-foreground">Total Spent</p>
+              <div className="text-xl sm:text-2xl font-bold text-purple-600">RM {totalSpent.toFixed(2)}</div>
+              <p className="text-xs sm:text-sm text-muted-foreground">Total Spent</p>
             </div>
           </div>
         </div>
