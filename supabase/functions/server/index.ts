@@ -38,17 +38,23 @@ app.post("/make-server-09ae98d3/signup", async (c) => {
     const { email, phone, password } = await c.req.json();
 
     // Validate input
-    if (!email || !password) {
-      return c.json({ error: "Email and password are required" }, 400);
+    if (!email || !password || !phone) {
+      return c.json({ error: "Email, phone and password are required" }, 400);
     }
 
-    // Create user in Supabase Auth
+    // Format phone number (must be in E.164 format: +60123456789)
+    const formattedPhone = phone.replace(/[^\d+]/g, '').startsWith('+') 
+      ? phone.replace(/[^\d+]/g, '') 
+      : `+60${phone.replace(/\D/g, '')}`;
+
+    // Create user with email first
     const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-      email,
+      email: email,
       password,
-      user_metadata: { phone },
-      // Automatically confirm the user's email since an email server hasn't been configured.
-      email_confirm: true
+      email_confirm: true,
+      user_metadata: { 
+        phone: formattedPhone
+      }
     });
 
     if (authError) {
@@ -56,15 +62,59 @@ app.post("/make-server-09ae98d3/signup", async (c) => {
       return c.json({ error: authError.message }, 400);
     }
 
+    // Update user to add phone number
+    const { error: updateError } = await supabase.auth.admin.updateUserById(
+      authData.user.id,
+      { 
+        phone: formattedPhone,
+        phone_confirm: true
+      }
+    );
+
+    if (updateError) {
+      console.log(`Error updating phone: ${updateError.message}`);
+    }
+
     return c.json({ 
       success: true,
       user: {
         id: authData.user.id,
-        email: email
+        email: email,
+        phone: formattedPhone
       }
     });
   } catch (error) {
     console.log(`Unexpected error during signup: ${error}`);
+    return c.json({ error: "Internal server error" }, 500);
+  }
+});
+
+// Get email by phone endpoint
+app.post("/make-server-09ae98d3/get-email-by-phone", async (c) => {
+  try {
+    const { phone } = await c.req.json();
+
+    if (!phone) {
+      return c.json({ error: "Phone is required" }, 400);
+    }
+
+    // List all users and find by phone in metadata
+    const { data: { users }, error } = await supabase.auth.admin.listUsers();
+
+    if (error) {
+      console.log(`Error listing users: ${error.message}`);
+      return c.json({ error: "Failed to find user" }, 500);
+    }
+
+    const user = users?.find(u => u.user_metadata?.phone === phone);
+
+    if (!user || !user.email) {
+      return c.json({ error: "User not found" }, 404);
+    }
+
+    return c.json({ email: user.email });
+  } catch (error) {
+    console.log(`Unexpected error: ${error}`);
     return c.json({ error: "Internal server error" }, 500);
   }
 });

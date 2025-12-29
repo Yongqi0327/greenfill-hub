@@ -21,12 +21,9 @@ export function Login({ onLogin, onSwitchToRegister }: LoginProps) {
       return;
     }
 
-    // Validate email or phone
-    const isEmail = email.includes('@');
-    const isPhone = /^[0-9+\-\s()]+$/.test(email);
-
-    if (!isEmail && !isPhone) {
-      setError('Please enter a valid email or phone number');
+    // Validate email
+    if (!email.includes('@')) {
+      setError('Please enter a valid email');
       return;
     }
 
@@ -58,14 +55,14 @@ export function Login({ onLogin, onSwitchToRegister }: LoginProps) {
 
           <div>
             <label htmlFor="email" className="block mb-2">
-              Email or Phone Number
+              Email
             </label>
             <input
               id="email"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email or phone"
+              placeholder="Enter your email"
               className="w-full px-4 py-3 rounded-lg border border-border bg-input-background focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>

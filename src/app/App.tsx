@@ -91,21 +91,15 @@ export default function App() {
   // Handle Login
   const handleLogin = async (emailOrPhone: string, password: string, rememberMe: boolean) => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: emailOrPhone,
-        password: password,
-      });
+      const { data, error } = await supabase.auth.signInWithPassword({ email: emailOrPhone, password });
 
       if (error) {
-        alert('Invalid credentials!');
+        alert('Invalid email or password!');
         return;
       }
 
       if (data.session) {
-        setCurrentUser({
-          email: data.user.email || '',
-          accessToken: data.session.access_token
-        });
+        setCurrentUser({ email: data.user.email || '', accessToken: data.session.access_token });
         setScreen('dashboard');
       }
     } catch (error) {
