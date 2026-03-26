@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { LogOut, User, ShoppingCart, MapPin, Star } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import oliveImg from '../../assets/olive-tree.svg';
 import { supabase } from '../../lib/supabase';
 
 interface Brand {
@@ -8,14 +9,16 @@ interface Brand {
   name: string;
   pricePerTenMl: number;
   color: string;
+  image?: string;
 }
 
 const brands: Brand[] = [
   { id: 'lifebuoy', name: 'Lifebuoy', pricePerTenMl: 0.015, color: 'from-red-500 to-red-600' },
-  { id: 'shokubutsu', name: 'Shokubutsu', pricePerTenMl: 0.45, color: 'from-pink-500 to-pink-600' },
-  { id: 'summerie', name: 'Summerie', pricePerTenMl: 0.55, color: 'from-yellow-500 to-amber-600' },
-  { id: 'pureen', name: 'Pureen', pricePerTenMl: 0.60, color: 'from-blue-500 to-blue-600' },
-  { id: 'antabax', name: 'Antabax', pricePerTenMl: 0.52, color: 'from-green-500 to-green-600' },
+  { id: 'shokubutsu', name: 'Shokubutsu', pricePerTenMl: 0.02, color: 'from-pink-500 to-pink-600' },
+  { id: 'summerie', name: 'Summerie', pricePerTenMl: 0.02, color: 'from-yellow-500 to-amber-600' },
+  { id: 'pureen', name: 'Pureen', pricePerTenMl: 0.18, color: 'from-blue-500 to-blue-600' },
+  { id: 'antabax', name: 'Antabax', pricePerTenMl: 0.018, color: 'from-green-500 to-green-600' },
+  { id: 'olive-tree', name: 'The Olive Tree', pricePerTenMl: 0.025, color: 'from-emerald-500 to-emerald-600', image: oliveImg },
 ];
 
 const locations = ['KK1', 'KK2', 'KK3', 'KK4', 'KK5', 'KK6', 'KK7', 'KK8', 'KK9', 'KK10', 'KK11', 'KK12', 'KK13'];
@@ -179,11 +182,15 @@ export function Dashboard({ userEmail, userId, onLogout, onProceedToPayment, onS
                       <div className="flex justify-between items-center">
                         <div>
                           <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${brand.color}`} />
+                            {brand.image ? (
+                              <ImageWithFallback src={brand.image} alt={brand.name} className="w-10 h-10 rounded-lg object-cover" />
+                            ) : (
+                              <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${brand.color}`} />
+                            )}
                             <div>
                               <h3 className="font-medium">{brand.name}</h3>
                               <p className="text-sm text-muted-foreground">
-                                RM {brand.pricePerTenMl.toFixed(2)} per 10ml
+                                RM {brand.pricePerTenMl.toFixed(3)} per 10ml
                               </p>
                             </div>
                           </div>
@@ -231,13 +238,13 @@ export function Dashboard({ userEmail, userId, onLogout, onProceedToPayment, onS
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Price per 10ml:</span>
-                        <span className="font-medium">RM {selectedBrand.pricePerTenMl.toFixed(2)}</span>
+                        <span className="font-medium">RM {selectedBrand.pricePerTenMl.toFixed(3)}</span>
                       </div>
                       <div className="border-t border-green-200 pt-2 mt-2">
                         <div className="flex justify-between">
                           <span className="font-medium">Total:</span>
                           <span className="text-xl font-bold text-green-600">
-                            RM {totalPrice.toFixed(2)}
+                            RM {totalPrice.toFixed(3)}
                           </span>
                         </div>
                       </div>

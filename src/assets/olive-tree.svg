@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <rect width="100%" height="100%" fill="white" />
+  <g transform="translate(20,20)">
+    <circle cx="100" cy="60" r="52" fill="#ffffff" stroke="#2d6a4f" stroke-width="4" />
+    <path d="M100 22 C85 40, 70 40, 60 60 C50 80, 80 92, 100 100 C120 92, 150 80, 140 60 C130 40, 115 40, 100 22 Z" fill="#2d6a4f" opacity="0.95" />
+    <text x="100" y="150" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#1b4332" text-anchor="middle">THE OLIVE TREE</text>
+    <text x="100" y="175" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1b4332" text-anchor="middle">EST 2015</text>
+  </g>
+</svg>

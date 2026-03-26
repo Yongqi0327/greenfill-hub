@@ -26,7 +26,7 @@ const availableVouchers: Voucher[] = [
   { id: '1', name: '10% Off Next Purchase', description: 'Get 10% discount on your next refill', points_required: 50, discount_type: 'percent', discount_value: 10 },
   { id: '2', name: 'RM5 Off', description: 'RM5 discount on purchases above RM20', points_required: 100, discount_type: 'fixed', discount_value: 5 },
   { id: '3', name: 'Free 50ml Refill', description: 'Get 50ml refill of any brand for free', points_required: 150, discount_type: 'free_volume', discount_value: 50 },
-  { id: '4', name: '20% Off Premium Brands', description: '20% off on Pureen and Antabax brands', points_required: 200, discount_type: 'percent', discount_value: 20, applicable_brands: ['Pureen', 'Antabax'] },
+  { id: '4', name: '20% Off Premium Brands', description: '20% off on Pureen, Antabax and The Olive Tree', points_required: 200, discount_type: 'percent', discount_value: 20, applicable_brands: ['Pureen', 'Antabax', 'The Olive Tree'] },
 ];
 
 export function UserProfile({ userEmail, userId, onBack, onVoucherRedeemed }: UserProfileProps) {
