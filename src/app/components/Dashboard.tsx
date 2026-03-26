@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { LogOut, User, ShoppingCart, MapPin, Star } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import oliveImg from '../../assets/the olive tree.png';
+import oliveImg from '../../assets/the-olive-tree.png';
 import { supabase } from '../../lib/supabase';
 
 interface Brand {
