@@ -15,10 +15,10 @@ interface Brand {
 const brands: Brand[] = [
   { id: 'olive-tree-earl-grey', name: 'The Olive Tree — Earl Grey', pricePerTenMl: 0.025, color: 'from-emerald-500 to-emerald-600', image: oliveImg },
   { id: 'olive-tree-lavender-bergamot', name: 'The Olive Tree — Lavender Bergamot', pricePerTenMl: 0.025, color: 'from-emerald-500 to-emerald-600', image: oliveImg },
-  { id: 'lifebuoy', name: 'Lifebuoy', pricePerTenMl: 0.015, color: 'from-red-500 to-red-600' },
-  { id: 'antabax', name: 'Antabax', pricePerTenMl: 0.018, color: 'from-green-500 to-green-600' },
-  { id: 'shokubutsu', name: 'Shokubutsu', pricePerTenMl: 0.02, color: 'from-pink-500 to-pink-600' },
-  { id: 'summerie', name: 'Summerie', pricePerTenMl: 0.02, color: 'from-yellow-500 to-amber-600' },
+  { id: 'lifebuoy', name: 'Lifebuoy', pricePerTenMl: 0.15, color: 'from-red-500 to-red-600' },
+  { id: 'antabax', name: 'Antabax', pricePerTenMl: 0.18, color: 'from-green-500 to-green-600' },
+  { id: 'shokubutsu', name: 'Shokubutsu', pricePerTenMl: 0.20, color: 'from-pink-500 to-pink-600' },
+  { id: 'summerie', name: 'Summerie', pricePerTenMl: 0.20, color: 'from-yellow-500 to-amber-600' },
   { id: 'pureen', name: 'Pureen', pricePerTenMl: 0.18, color: 'from-blue-500 to-blue-600' },
 ];
 
