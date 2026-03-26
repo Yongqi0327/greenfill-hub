@@ -86,6 +86,9 @@ export function Dashboard({ userEmail, userId, onLogout, onProceedToPayment, onS
 
   const totalPrice = calculatePrice();
 
+  const sigFormatter = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 2 });
+  const formatSig = (n: number) => sigFormatter.format(n);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       {/* Header */}
@@ -191,7 +194,7 @@ export function Dashboard({ userEmail, userId, onLogout, onProceedToPayment, onS
                             <div>
                               <h3 className="font-medium">{brand.name}</h3>
                               <p className="text-sm text-muted-foreground">
-                                RM {brand.pricePerTenMl.toFixed(3)} per 10ml
+                                RM {formatSig(brand.pricePerTenMl)} per 10ml
                               </p>
                             </div>
                           </div>
@@ -239,13 +242,13 @@ export function Dashboard({ userEmail, userId, onLogout, onProceedToPayment, onS
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Price per 10ml:</span>
-                        <span className="font-medium">RM {selectedBrand.pricePerTenMl.toFixed(3)}</span>
+                        <span className="font-medium">RM {formatSig(selectedBrand.pricePerTenMl)}</span>
                       </div>
                       <div className="border-t border-green-200 pt-2 mt-2">
                         <div className="flex justify-between">
                           <span className="font-medium">Total:</span>
                           <span className="text-xl font-bold text-green-600">
-                            RM {totalPrice.toFixed(3)}
+                            RM {formatSig(totalPrice)}
                           </span>
                         </div>
                       </div>
@@ -258,7 +261,7 @@ export function Dashboard({ userEmail, userId, onLogout, onProceedToPayment, onS
                     className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     <ShoppingCart className="w-5 h-5" />
-                    Proceed to Payment - RM {totalPrice.toFixed(2)}
+                    Proceed to Payment - RM {formatSig(totalPrice)}
                   </button>
                 </div>
               </div>
