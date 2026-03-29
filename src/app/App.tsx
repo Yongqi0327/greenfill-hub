@@ -10,6 +10,7 @@ import { supabase } from '../lib/supabase';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
 type Screen = 'login' | 'register' | 'dashboard' | 'payment' | 'reminder' | 'dispensing' | 'profile';
+const REWARD_POINTS_PER_RM = 10;
 
 interface Brand {
   id: string;
@@ -252,7 +253,7 @@ export default function App() {
     }
 
     try {
-      const pointsEarned = Math.floor(currentOrder.totalPrice);
+      const pointsEarned = Math.floor(currentOrder.totalPrice * REWARD_POINTS_PER_RM);
 
       const { error } = await supabase
         .from('refill_history')

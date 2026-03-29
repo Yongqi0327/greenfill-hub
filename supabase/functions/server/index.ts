@@ -4,6 +4,7 @@ import { logger } from "npm:hono/logger";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const app = new Hono();
+const REWARD_POINTS_PER_RM = 10;
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -190,8 +191,8 @@ app.post("/make-server-09ae98d3/add-refill", async (c) => {
 
     const { brand, volume, totalPrice, location, paymentMethod } = await c.req.json();
 
-    // Calculate reward points (1 point per RM spent)
-    const pointsEarned = Math.floor(totalPrice);
+    // Calculate reward points (10 points per RM spent)
+    const pointsEarned = Math.floor(totalPrice * REWARD_POINTS_PER_RM);
 
     // Insert refill record into refill_history table
     const { error: insertError } = await supabase
